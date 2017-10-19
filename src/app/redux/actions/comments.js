@@ -63,7 +63,16 @@ export function voteComment(option, comment) {
   }
 }
 
-function updateComment(comment) {
+export function updateComment(comment) {
+  return function (dispatch) {
+    axios.put('comments/' + comment.id, comment)
+      .then(response => {
+        dispatch(updatedComment(response));
+      });
+  }
+}
+
+function updatedComment(comment) {
   return {
     type: UPDATE_COMMENT,
     comment

@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { Segment, Button, Header, Comment, Form } from 'semantic-ui-react';
-import { getComments, addComment, deleteComment, voteComment } from '../redux/actions/comments';
+import { getComments, addComment, deleteComment, updateComment, voteComment } from '../redux/actions/comments';
 
 class CommentList extends Component {
   state = {
-    comment: '',
+    id: '',
+    body: '',
     author: ''
   };
 
@@ -14,29 +15,47 @@ class CommentList extends Component {
     this.props.dispatch(getComments(this.props.post));
   }
 
-  formatCommentDate(comment) {
+  editComment = (comment) => {
+    this.setState({
+      id: comment.id,
+      body: comment.body,
+      author: comment.author
+    });
+  }
+
+  formatCommentDate = (comment) => {
     let commentDate = new Date(comment.timestamp);
     return moment([commentDate.getFullYear(), commentDate.getMonth(), commentDate.getDate()]).fromNow();
   }
 
-  handleInputChange(name, value) {
+  handleInputChange = (name, value) => {
     this.setState({[name]: value});
   }
 
-  addComment() {
-    let comment = {
-      id: new Date().getTime(),
-      timestamp: new Date().getTime(),
-      parentId: this.props.post.id,
-      author: this.state.author,
-      body: this.state.comment,
-      deleted: false
-    };
+  addUpdateComment = () => {
+    if (this.state.id) {
+      this.props.dispatch(updateComment(this.state));
+    } else {
+      let comment = {
+        id: new Date().getTime(),
+        timestamp: new Date().getTime(),
+        parentId: this.props.post,
+        author: this.state.author,
+        body: this.state.body,
+        deleted: false
+      };
 
-    this.props.dispatch(addComment(comment));
+      this.props.dispatch(addComment(comment));
+    }
+
+    this.setState({
+      id: '',
+      body: '',
+      author: ''
+    });
   }
 
-  deleteComment(comment) {
+  deleteComment = (comment) => {
     this.props.dispatch(deleteComment(comment.id));
   }
 
@@ -58,7 +77,7 @@ class CommentList extends Component {
                       {this.formatCommentDate(comment)}
                     </div>
                   </Comment.Metadata>
-                  <Button floated='right' icon='edit' size='mini' color='grey' title='Edit this comment'/>
+                  <Button floated='right' icon='edit' size='mini' color='grey' title='Edit this comment' onClick={() => this.editComment(comment)} />
                   <Button floated='right' icon='delete' size='mini' color='red' title='Delete this comment' onClick={() => this.deleteComment(comment)} />
                   <Button floated='right' icon='thumbs down' size='mini' title='Down vote this comment' onClick={() => this.props.dispatch(voteComment('downVote', comment))} />
                   <Button floated='right' icon='thumbs up' size='mini' color='green' title='Up vote this comment' onClick={() => this.props.dispatch(voteComment('upVote', comment))} />
@@ -71,10 +90,11 @@ class CommentList extends Component {
             </Segment>
           );
         })}
-        <Form reply onSubmit={() => this.addComment()}>
-          <Form.TextArea name='comment' placeholder='Body' value={this.state.comment} onChange={(e, {name, value}) => this.handleInputChange(name, value)} />
+        <Form reply onSubmit={() => this.addUpdateComment()}>
+          <Form.TextArea name='body' placeholder='Body' value={this.state.body} onChange={(e, {name, value}) => this.handleInputChange(name, value)} />
           <Form.Input name='author' placeholder='Author' value={this.state.author} onChange={(e, {name, value}) => this.handleInputChange(name, value)} />
-          <Button content='Add comment' primary />
+          {!this.state.id && <Button content='Add comment' primary />}
+          {this.state.id && <Button content='Update comment' primary />}
         </Form>
       </Comment.Group>
     );
@@ -82,7 +102,6 @@ class CommentList extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     comments: state.comments.comments
   };
