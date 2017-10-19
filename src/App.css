@@ -1,0 +1,11 @@
+.App-nav {
+  text-align: center;
+  background-color: #F5F5F5;
+  padding: 1.5rem;
+  font-size: 2rem;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.2);
+}
+
+.App-container {
+  margin-top: 3rem;
+}
