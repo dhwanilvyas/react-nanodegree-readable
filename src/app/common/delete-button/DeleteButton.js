@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Button, Confirm } from 'semantic-ui-react';
 import { deletePost } from '../../redux/actions/posts';
 
@@ -17,6 +18,7 @@ class DeleteButton extends Component {
   confirmDelete() {
     this.props.dispatch(deletePost(this.props.post));
     this.handleConfirmModal();
+    this.props.history.push('/');
   }
 
   render() {
@@ -41,4 +43,4 @@ class DeleteButton extends Component {
   }
 }
 
-export default connect()(DeleteButton);
+export default withRouter(connect()(DeleteButton));
