@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './app/home/Home';
 import PostDetail from './app/post-detail/PostDetail';
 import PostListContainer from './app/post-list/PostList_Container';
@@ -16,10 +16,12 @@ class App extends Component {
               <Link to='/'>Readable</Link>
             </div>
             <div className="App-container">
-              <Route path='/' exact component={Home} />
-              <Route path='/publish' exact component={PostAddUpdate} />
-              <Route path='/:category' exact component={PostListContainer} />
-              <Route path='/:category/:post' exact component={PostDetail} />
+              <Switch>
+                <Route path='/' exact component={Home} />
+                <Route path='/post/publish' exact component={PostAddUpdate} />
+                <Route path='/:category' exact component={PostListContainer} />
+                <Route path='/:category/:post' exact component={PostDetail} />
+              </Switch>
             </div>
           </div>
         </Router>

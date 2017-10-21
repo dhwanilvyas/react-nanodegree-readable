@@ -8,7 +8,7 @@ const EditButton = ({post, history}) => (
     size='mini'
     color='grey'
     title='Edit this post'
-    onClick={() => history.push('/publish', {post})} />
+    onClick={() => history.push('/post/publish', {post})} />
 );
 
 export default withRouter(EditButton);

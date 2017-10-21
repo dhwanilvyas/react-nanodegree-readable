@@ -20,7 +20,7 @@ class Home extends Component {
             <List>
               <List.Item>
                 <List.Content floated='right'>
-                  <Link to='/publish'>
+                  <Link to='/post/publish'>
                     <strong>New Post</strong>
                   </Link>
                 </List.Content>
