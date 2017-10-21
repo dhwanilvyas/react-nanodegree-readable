@@ -5,9 +5,10 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import store from './app/redux/store';
+import ENV from './env';
 
-axios.defaults.baseURL = 'http://localhost:5001/';
-axios.defaults.headers.Authorization = "dKx,dmvnsdflkjdfNkdlkfj";
+axios.defaults.baseURL = ENV.apiUrl;
+axios.defaults.headers.Authorization = ENV.apiKey;
 axios.interceptors.response.use(function (response) {
     return response.data;
   }, function (error) {
