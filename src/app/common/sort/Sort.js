@@ -18,7 +18,7 @@ const options = [
 
 class Sort extends Component {
   sort(field) {
-    this.props.dispatch(sortPosts(field.value));
+    this.props.sortPosts(field.value);
   }
 
   render() {
@@ -28,4 +28,4 @@ class Sort extends Component {
   }
 }
 
-export default connect()(Sort);
+export default connect(null, {sortPosts})(Sort);

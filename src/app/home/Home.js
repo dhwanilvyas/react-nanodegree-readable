@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Container, Grid, Segment, List } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import CategoryList from '../category-list/CategoryList_Component';
@@ -37,4 +36,4 @@ class Home extends Component {
   }
 }
 
-export default connect()(Home);
+export default Home;

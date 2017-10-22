@@ -63,4 +63,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(PostDetail);
+export default connect(mapStateToProps, null)(PostDetail);

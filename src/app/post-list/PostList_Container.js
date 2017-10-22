@@ -12,7 +12,7 @@ import { capitalize } from '../../utils/helpers';
 
 class PostListContainer extends Component {
   componentDidMount() {
-    this.props.dispatch(getPosts(this.props.match.params.category));
+    this.props.getPosts(this.props.match.params.category);
   }
 
   getUrl(post) {
@@ -70,4 +70,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default withRouter(connect(mapStateToProps)(PostListContainer));
+export default withRouter(connect(mapStateToProps, {getPosts})(PostListContainer));

@@ -16,7 +16,7 @@ class DeleteButton extends Component {
   }
 
   confirmDelete() {
-    this.props.dispatch(deletePost(this.props.post));
+    this.props.deletePost(this.props.post);
     this.handleConfirmModal();
     this.props.history.push('/');
   }
@@ -43,4 +43,4 @@ class DeleteButton extends Component {
   }
 }
 
-export default withRouter(connect()(DeleteButton));
+export default withRouter(connect(null, {deletePost})(DeleteButton));

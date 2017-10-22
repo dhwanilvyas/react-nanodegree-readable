@@ -8,7 +8,7 @@ import { getCategories } from '../redux/actions/categories';
 class CategoryList extends Component {
 
   componentDidMount() {
-    this.props.dispatch(getCategories());
+    this.props.getCategories();
   }
 
   render() {
@@ -44,4 +44,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(CategoryList);
+export default connect(mapStateToProps, {getCategories})(CategoryList);

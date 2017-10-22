@@ -12,7 +12,7 @@ class CommentList extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(getComments(this.props.post));
+    this.props.getComments(this.props.post);
   }
 
   editComment = (comment) => {
@@ -34,7 +34,7 @@ class CommentList extends Component {
 
   addUpdateComment = () => {
     if (this.state.id) {
-      this.props.dispatch(updateComment(this.state));
+      this.props.updateComment(this.state);
     } else {
       let comment = {
         id: new Date().getTime(),
@@ -45,7 +45,7 @@ class CommentList extends Component {
         deleted: false
       };
 
-      this.props.dispatch(addComment(comment));
+      this.props.addComment(comment);
     }
 
     this.setState({
@@ -56,7 +56,7 @@ class CommentList extends Component {
   }
 
   deleteComment = (comment) => {
-    this.props.dispatch(deleteComment(comment.id));
+    this.props.deleteComment(comment.id);
   }
 
   render() {
@@ -79,8 +79,8 @@ class CommentList extends Component {
                   </Comment.Metadata>
                   <Button floated='right' icon='edit' size='mini' color='grey' title='Edit this comment' onClick={() => this.editComment(comment)} />
                   <Button floated='right' icon='delete' size='mini' color='red' title='Delete this comment' onClick={() => this.deleteComment(comment)} />
-                  <Button floated='right' icon='thumbs down' size='mini' title='Down vote this comment' onClick={() => this.props.dispatch(voteComment('downVote', comment))} />
-                  <Button floated='right' icon='thumbs up' size='mini' color='green' title='Up vote this comment' onClick={() => this.props.dispatch(voteComment('upVote', comment))} />
+                  <Button floated='right' icon='thumbs down' size='mini' title='Down vote this comment' onClick={() => this.props.voteComment('downVote', comment)} />
+                  <Button floated='right' icon='thumbs up' size='mini' color='green' title='Up vote this comment' onClick={() => this.props.voteComment('upVote', comment)} />
                   <Comment.Text>
                     <p>{comment.voteScore} votes</p>
                     <p>{comment.body}</p>
@@ -107,4 +107,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(CommentList);
+export default connect(mapStateToProps, {getComments, addComment, deleteComment, updateComment, voteComment})(CommentList);
