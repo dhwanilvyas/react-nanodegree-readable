@@ -50,7 +50,8 @@ class PostListContainer extends Component {
                     <h4>{post.title}</h4>
                     <List.Description>
                       <span>By: {capitalize(post.author)} | </span>
-                      <span>Votes: {post.voteScore}</span>
+                      <span>Votes: {post.voteScore} | </span>
+                      <span>Comments: {post.commentCount}</span>
                     </List.Description>
                   </List.Content>
                 </Segment>

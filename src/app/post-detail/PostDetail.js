@@ -27,7 +27,7 @@ class PostDetail extends Component {
     if (!post.id) {
       return (
         <Container>
-          <p>No post found.</p>  
+          <p>No post found.</p>
         </Container>
       );
     }
@@ -48,7 +48,7 @@ class PostDetail extends Component {
           </List.Item>
         </List>
         <h4>Posted by {post.author} {post.time}</h4>
-        <p>Votes: {post.voteScore}</p>
+        <p>Votes: {post.voteScore} | Comments: {post.commentCount}</p>
         <p>{post.body}</p>
         <br />
         <CommentList post={post.id} />

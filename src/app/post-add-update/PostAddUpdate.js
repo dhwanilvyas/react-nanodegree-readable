@@ -52,10 +52,10 @@ class PostAddUpdate extends Component {
         <Header>{id ? 'Update post' : 'Add post'}</Header>
         <Divider />
         <Form onSubmit={this.addUpdate}>
-          <Form.Input label='Title' name='title' value={title} onChange={this.handleInputChange} />
-          <Form.Input label='Author' name='author' value={author} onChange={this.handleInputChange} />
-          <Form.Select label='Category' name='category' value={category} onChange={this.handleInputChange} options={categories} />
-          <Form.TextArea label='Body' name='body' value={body} onChange={this.handleInputChange} />
+          <Form.Input required label='Title' name='title' value={title} onChange={this.handleInputChange} />
+          <Form.Input required label='Author' name='author' value={author} onChange={this.handleInputChange} />
+          <Form.Select required label='Category' name='category' value={category} onChange={this.handleInputChange} options={categories} />
+          <Form.TextArea required label='Body' name='body' value={body} onChange={this.handleInputChange} />
           <Form.Button>Publish!</Form.Button>
         </Form>
       </Container>

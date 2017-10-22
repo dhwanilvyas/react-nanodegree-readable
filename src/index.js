@@ -7,8 +7,8 @@ import App from './App';
 import store from './app/redux/store';
 import ENV from './env';
 
-axios.defaults.baseURL = ENV.apiUrl;
-axios.defaults.headers.Authorization = ENV.apiKey;
+axios.defaults.baseURL = ENV.apiUrl || 'http://localhost:3001/';
+axios.defaults.headers.Authorization = ENV.apiKey || 'sdfKdfksjdfmxv,m';
 axios.interceptors.response.use(function (response) {
     return response.data;
   }, function (error) {
